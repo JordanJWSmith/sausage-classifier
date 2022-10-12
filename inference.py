@@ -8,6 +8,7 @@ from model import CNNModel
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', '--input', default='input/valid/sausage/sausage_16.jpg', help='path to the input image')
+parser.add_argument('-d', '--display', default=True, help='display each image')
 args = vars(parser.parse_args())
 
 device = ('cuda' if torch.cuda.is_available() else 'cpu')
@@ -57,7 +58,12 @@ cv2.putText(
     0.6, (0, 0, 255), 1,
     cv2.LINE_AA
 )
-print(f'GT: {gt_class}, pred: {pred_class}')
-cv2.imshow('Result', orig_image)
-cv2.waitKey(0)
-cv2.imwrite("outputs/{gt_class}{args['input'].split('/')[-1].split('.')[0]}.png", orig_image)
+print(f'Image: {args["input"]} GT: {gt_class}, pred: {pred_class}')
+
+display = args['display']
+
+if display != 'False':
+    cv2.imshow('Result', orig_image)
+    cv2.waitKey(0)
+
+cv2.imwrite(f"outputs/{gt_class}{args['input'].split('/')[-1].split('.')[0]}.png", orig_image)

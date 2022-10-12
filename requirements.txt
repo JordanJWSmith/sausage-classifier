@@ -5,3 +5,5 @@ tqdm
 beautifulsoup4
 requests
 opencv-python
+pytorch-lightning
+transformers

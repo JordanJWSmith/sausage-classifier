@@ -5,24 +5,27 @@ import torch.optim as optim
 import time
 
 from tqdm.auto import tqdm
-from model import CNNModel
+from model import CNNModel, ViTLightningModule
 from datasets import train_loader, valid_loader
 from utils import save_model, save_plots
 from web_scrape import input_filepath_exists, generate_dataset
 
 
-
-
 parser = argparse.ArgumentParser()
-parser.add_argument('-e', '--epochs', type=int, default=20, help='number of epochs to train for')
-parser.add_argument('-r', '--redownload', type=bool, default=False, help='run the image scraping script')
+parser.add_argument('-e', '--epochs', type=int, default=20,
+                    help='number of epochs to train for')
+parser.add_argument('-r', '--redownload', type=bool, default=False,
+                    help='run the image scraping script')
+parser.add_argument('-m', '--model', type=str, default='CNN',
+                    help='choose which model to run from the following: {CNN, ViT}')
 args = vars(parser.parse_args())
 
 lr = 1e-3
 epochs = args['epochs']
 redownload = args['redownload']
+model_flag = args['model']
 
-if redownload and input_filepath_exists():
+if redownload == 'True' and input_filepath_exists():
     print('Webscraping images')
     generate_dataset()
 
@@ -30,7 +33,12 @@ if redownload and input_filepath_exists():
 device = ('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Computation device: {device}\n")
 
-model = CNNModel().to(device)
+if model_flag == 'CNN':
+    model = CNNModel().to(device)
+elif model_flag == 'ViT':
+    model = ViTLightningModule().to(device)
+else:
+    model = CNNModel().to(device)
 print(model)
 
 total_params = sum(p.numel() for p in model.parameters())
@@ -109,5 +117,5 @@ for epoch in range(epochs):
     time.sleep(5)
 
 save_model(epochs, model, optimiser, criterion)
-save_plots(train_acc, valid_acc, train_loss, valid_loss)
+save_plots(train_acc, valid_acc, train_loss, valid_loss, model.name, epochs)
 
