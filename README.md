@@ -54,3 +54,4 @@ Currently 20 images are scraped for each query, 15 of which are placed in `train
 - Explore alternative webscraping for training data - larger images etc
 - Webscraping queries read from json/txt file, args to specify path
 - Explore active learning for scraping additional images
+- Update powershell script to bash 
