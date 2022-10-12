@@ -1,3 +1,5 @@
+# inspo: https://python.plainenglish.io/how-to-scrape-images-using-beautifulsoup4-in-python-e7a4ddb904b8
+
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -11,7 +13,8 @@ def input_filepath_exists():
 def build_filepath(class_name):
     train_path = f'input/train/{class_name}/'
     valid_path = f'input/valid/{class_name}/'
-    for path in [train_path, valid_path]:
+    output_path = 'outputs/'
+    for path in [train_path, valid_path, output_path]:
         if not os.path.exists(path):
             print(f'Building filepath {path}')
             os.makedirs(path)
