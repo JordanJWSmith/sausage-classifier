@@ -15,3 +15,5 @@
 #
 #     run_training()
 
+print('Please run train.py')
+
