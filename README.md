@@ -1,6 +1,8 @@
 # sausage-classifier
 A simple classification model to identify sausages. 
 
+![Sausage](https://live.staticflickr.com/499/32113273682_effd1084a6_b.jpg)
+
 ## Install
 Clone the repo and install the requirements.
 
