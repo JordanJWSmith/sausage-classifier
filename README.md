@@ -78,7 +78,7 @@ Turn off the function to display the chosen image by setting the `--display` fla
 - Add more models to compare
 - ~~Add args to allow users to select models~~
 - ~~Add greater flexibility when saving models/outputs~~
-- ~~~Add model flexibility in `inference.py`~~~
+- ~~Add model flexibility in `inference.py`~~
 - Improve inference.py output image
 - Explore alternative webscraping for training data - larger images etc
 - ~~Webscraping queries read from json/txt file, args to specify path~~
