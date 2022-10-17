@@ -33,9 +33,9 @@ id2label = {0: 'sausage', 1: 'non-sausage'}
 label2id = {'sausage': 0, 'non-sausage': 1}
 
 
-class ViTLightningModule(pl.LightningModule):
+class ViTModel(pl.LightningModule):
     def __init__(self, num_labels=2):
-        super(ViTLightningModule, self).__init__()
+        super(ViTModel, self).__init__()
         self.name = 'ViTModel'
         self.vit = ViTForImageClassification.from_pretrained('google/vit-base-patch16-224-in21k',
                                                              num_labels=2,
@@ -75,7 +75,6 @@ class ViTLightningModule(pl.LightningModule):
 
     def test_step(self, batch, batch_idx):
         loss, accuracy = self.common_step(batch, batch_idx)
-
         return loss
 
     def configure_optimizers(self):

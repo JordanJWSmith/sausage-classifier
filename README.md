@@ -8,6 +8,7 @@ Clone the repo and install the requirements.
 
     pip install -r requirements.txt
     
+## Training
     
 Run the training.
 
@@ -45,7 +46,7 @@ can be updated.
 Currently 20 images are scraped for each query, 15 of which are placed in `train/` and 5 are placed in `valid/`.
 
 
-### Inference
+## Inference
 
 Run the model on one given image and see its prediction by running `inference.py` with a filepath. This filepath 
 defaults to `sausage_16.jpg`.
@@ -55,14 +56,32 @@ defaults to `sausage_16.jpg`.
 This returns the specified image overlaid with the ground_truth (GT) and model predictions. 
 Work will be done to make this look nicer. 
 
+### Inference Options
+
+#### Model
+
+Specify which model you'd like to run inference on by setting the `--model` flag to the desired `.pth` file. These 
+files are found in the `outputs/` directory. 
+
+This defaults to the first `.pth` file in the directory. 
+
+    python inference.py input/valid/sausage/chosen_image.jpg --model CNNModel_model_20_epochs.pth
+
+#### Show Image
+
+Turn off the function to display the chosen image by setting the `--display` flag to `False`. This defaults to `True`. 
+
+    python inference.py input/valid/sausage/chosen_image.jpg --display False
 
 
 ## To-Do
 - Add more models to compare
 - ~~Add args to allow users to select models~~
 - ~~Add greater flexibility when saving models/outputs~~
+- ~~~Add model flexibility in `inference.py`~~~
 - Improve inference.py output image
 - Explore alternative webscraping for training data - larger images etc
 - ~~Webscraping queries read from json/txt file, args to specify path~~
 - Explore active learning for scraping additional images
 - Update powershell script to bash 
+- imwrite() in `inference.py`

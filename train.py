@@ -7,7 +7,7 @@ import torch.optim as optim
 import time
 
 from tqdm.auto import tqdm
-from model import CNNModel, ViTLightningModule
+from model import CNNModel, ViTModel
 from datasets import train_loader, valid_loader
 from utils import save_model, save_plots
 from web_scrape import input_filepath_exists, generate_dataset
@@ -38,7 +38,7 @@ print(f"Computation device: {device}\n")
 if model_flag == 'CNN':
     model = CNNModel().to(device)
 elif model_flag == 'ViT':
-    model = ViTLightningModule().to(device)
+    model = ViTModel().to(device)
 else:
     model = CNNModel().to(device)
 print(model)
