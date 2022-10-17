@@ -24,7 +24,7 @@ If this is your first time, training data will automatically be webscraped and o
             - non-sausage
             
             
-### Options
+### Training Options
             
 #### Epochs
 
@@ -39,10 +39,21 @@ Force the image web-scraper to rerun by setting the optional `--redownload` flag
 
     python train.py --redownload True
     
-This is useful if you've amended the image search queries. These are currently found in the `scrape_dict` object within `generate_dataset()` in `web_scrape.py`. 
-Work will be done to convert this into a separate JSON file to make it easier to edit. 
+This is useful if you've amended the image search queries. These are found in the `image_queries.json` file and 
+can be updated.
 
 Currently 20 images are scraped for each query, 15 of which are placed in `train/` and 5 are placed in `valid/`.
+
+
+### Inference
+
+Run the model on one given image and see its prediction by running `inference.py` with a filepath. This filepath 
+defaults to `sausage_16.jpg`.
+
+    python inference.py input/valid/sausage/chosen_image.jpg
+
+This returns the specified image overlaid with the ground_truth (GT) and model predictions. 
+Work will be done to make this look nicer. 
 
 
 
