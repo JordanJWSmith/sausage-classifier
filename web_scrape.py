@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import urllib.request
+import json
 
 
 def input_filepath_exists():
@@ -56,10 +57,11 @@ def scrape_images(class_name, queries):
 
 
 def generate_dataset():
-    scrape_dict = {
-        'sausage': ['sausage', 'sausages', 'sausage plate', 'one sausage', 'short sausage'],
-        'non_sausage': ['salad', 'chicken wings', 'cheeseburger', 'nachos', 'prime rib', 'spaghetti']
-    }
+    # Add image queries to image_queries.json
+    # Each query currently generates ~20 images
 
-    for class_name, queries in scrape_dict.items():
+    with open('image_queries.json', 'r') as f:
+        queries_json = json.load(f)
+
+    for class_name, queries in queries_json.items():
         scrape_images(class_name, queries)

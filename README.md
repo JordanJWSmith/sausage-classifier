@@ -48,10 +48,10 @@ Currently 20 images are scraped for each query, 15 of which are placed in `train
 
 ## To-Do
 - Add more models to compare
-- Add args to allow users to select models
-- Add greater flexibility when saving models/outputs
+- ~~Add args to allow users to select models~~
+- ~~Add greater flexibility when saving models/outputs~~
 - Improve inference.py output image
 - Explore alternative webscraping for training data - larger images etc
-- Webscraping queries read from json/txt file, args to specify path
+- ~~Webscraping queries read from json/txt file, args to specify path~~
 - Explore active learning for scraping additional images
 - Update powershell script to bash 
