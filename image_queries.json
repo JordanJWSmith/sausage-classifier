@@ -2,9 +2,9 @@
   "sausage": [
     "sausage",
     "sausages",
-    "sausage plate",
     "one sausage",
-    "short sausage"
+    "short sausage",
+    "single sausage"
   ],
   "non_sausage": [
     "salad",
@@ -12,6 +12,7 @@
     "cheeseburger",
     "nachos",
     "prime rib",
-    "spaghetti"
+    "spaghetti",
+    "pizza"
   ]
 }

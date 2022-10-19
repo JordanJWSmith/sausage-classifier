@@ -105,19 +105,19 @@ def validate(model, test_loader, criterion):
 train_loss, valid_loss = [], []
 train_acc, valid_acc = [], []
 
-# for epoch in range(epochs):
-#     print(f"[INFO]: Epoch {epoch+1} of {epochs}")
-#     train_epoch_loss, train_epoch_acc = train(model, train_loader, optimiser, criterion)
-#     valid_epoch_loss, valid_epoch_acc = validate(model, valid_loader, criterion)
-#     train_loss.append(train_epoch_loss)
-#     valid_loss.append(valid_epoch_loss)
-#     train_acc.append(train_epoch_acc)
-#     valid_acc.append(valid_epoch_acc)
-#     print(f"Training loss: {train_epoch_loss:.3f}, training acc: {train_epoch_acc:.3f}")
-#     print(f"Validation loss: {valid_epoch_loss:.3f}, validation acc: {valid_epoch_acc:.3f}")
-#     print('-' * 50)
-#     time.sleep(5)
-#
-# save_model(epochs, model, optimiser, criterion)
-# save_plots(train_acc, valid_acc, train_loss, valid_loss, model.name, epochs)
+for epoch in range(epochs):
+    print(f"[INFO]: Epoch {epoch+1} of {epochs}")
+    train_epoch_loss, train_epoch_acc = train(model, train_loader, optimiser, criterion)
+    valid_epoch_loss, valid_epoch_acc = validate(model, valid_loader, criterion)
+    train_loss.append(train_epoch_loss)
+    valid_loss.append(valid_epoch_loss)
+    train_acc.append(train_epoch_acc)
+    valid_acc.append(valid_epoch_acc)
+    print(f"Training loss: {train_epoch_loss:.3f}, training acc: {train_epoch_acc:.3f}")
+    print(f"Validation loss: {valid_epoch_loss:.3f}, validation acc: {valid_epoch_acc:.3f}")
+    print('-' * 50)
+    time.sleep(5)
+
+save_model(epochs, model, optimiser, criterion)
+save_plots(train_acc, valid_acc, train_loss, valid_loss, model.name, epochs)
 

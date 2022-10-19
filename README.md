@@ -1,5 +1,5 @@
 # sausage-classifier
-A simple classification model to identify sausages. 
+A classification model toolkit to identify sausages. 
 
 ![Sausage](https://live.staticflickr.com/499/32113273682_effd1084a6_b.jpg)
 
@@ -85,3 +85,11 @@ Turn off the function to display the chosen image by setting the `--display` fla
 - Explore active learning for scraping additional images
 - Update powershell script to bash 
 - imwrite() in `inference.py`
+- Randomise test/train split
+
+
+## Notes
+- The image query 'sausage plate' was polluting the training/validation data with chopped sausages, wellingtons etc. 
+This has been replaced by the query 'single sausage'
+- It's possible that the 'quality' of search images degrades the further down the list you go. In other words, the top 
+Google search image may be more accurate than the 20th. Train/validation split should be randomised to account for this. 
