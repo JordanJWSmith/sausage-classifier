@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import os
 import urllib.request
 import json
+import random
 
 
 def input_filepath_exists():

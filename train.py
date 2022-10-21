@@ -40,6 +40,7 @@ if model_flag == 'CNN':
 elif model_flag == 'ViT':
     model = ViTModel().to(device)
 else:
+    print('Model unrecognised - defaulting to CNNModel')
     model = CNNModel().to(device)
 print(model)
 

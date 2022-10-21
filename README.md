@@ -90,6 +90,7 @@ Turn off the function to display the chosen image by setting the `--display` fla
 
 ## Notes
 - The image query 'sausage plate' was polluting the training/validation data with chopped sausages, wellingtons etc. 
-This has been replaced by the query 'single sausage'
+Replacing this query with 'single sausage' improved average accuracy from ~60 to ~80
 - It's possible that the 'quality' of search images degrades the further down the list you go. In other words, the top 
-Google search image may be more accurate than the 20th. Train/validation split should be randomised to account for this. 
+Google search image may be more accurate than the 20th. To account for this, a random shuffle was added after the images
+are webscraped and before they are written to files. 
