@@ -76,6 +76,7 @@ Turn off the function to display the chosen image by setting the `--display` fla
 
 ## To-Do
 - Add more models to compare
+- Add more performance metrics
 - ~~Add args to allow users to select models~~
 - ~~Add greater flexibility when saving models/outputs~~
 - ~~Add model flexibility in `inference.py`~~
@@ -85,7 +86,10 @@ Turn off the function to display the chosen image by setting the `--display` fla
 - Explore active learning for scraping additional images
 - Update powershell script to bash 
 - imwrite() in `inference.py`
-- Randomise test/train split
+- ~~Randomise test/train split~~
+- Create branch training on multiple classes (not just binary)
+  - Alter directory structure when webscraping
+  - Adjust classes in models
 
 
 ## Notes
@@ -94,3 +98,4 @@ Replacing this query with 'single sausage' improved average accuracy from ~60 to
 - It's possible that the 'quality' of search images degrades the further down the list you go. In other words, the top 
 Google search image may be more accurate than the 20th. To account for this, a random shuffle was added after the images
 are webscraped and before they are written to files. 
+
