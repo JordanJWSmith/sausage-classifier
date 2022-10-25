@@ -2,6 +2,7 @@ import torch
 import matplotlib
 import matplotlib.pyplot as plt
 import os
+import json
 
 matplotlib.style.use('ggplot')
 
@@ -69,5 +70,14 @@ def save_plots(train_acc, valid_acc, train_loss, valid_loss, model_name, epochs)
     plt.ylabel('Loss')
     plt.legend()
     plt.savefig(f'outputs/{model_name}_loss_{epochs}_epochs.png')
+
+
+def label_id_dicts(filepath):
+    with open(filepath, 'r') as f:
+        queries_json = json.load(f)
+        id2label = {idx: label for idx, label in enumerate(queries_json.keys())}
+        label2id = {label: idx for idx, label in id2label.items()}
+        num_classes = len(id2label.keys())
+        return id2label, label2id, num_classes
 
 

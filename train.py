@@ -40,8 +40,7 @@ if model_flag == 'CNN':
 elif model_flag == 'ViT':
     model = ViTModel().to(device)
 else:
-    print('Model unrecognised - defaulting to CNNModel')
-    model = CNNModel().to(device)
+    raise Exception("Please choose from {CNN, ViT}")
 print(model)
 
 total_params = sum(p.numel() for p in model.parameters())

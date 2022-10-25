@@ -6,13 +6,25 @@
     "short sausage",
     "single sausage"
   ],
-  "non_sausage": [
-    "salad",
-    "chicken wings",
-    "cheeseburger",
-    "nachos",
-    "prime rib",
-    "spaghetti",
+  "salad": [
+    "salad"
+  ],
+  "chicken wings": [
+    "chicken wings"
+  ],
+  "cheeseburger": [
+    "cheeseburger"
+  ],
+  "nachos": [
+    "nachos"
+  ],
+  "prime rib": [
+    "prime rib"
+  ],
+  "spaghetti": [
+    "spaghetti"
+  ],
+  "pizza": [
     "pizza"
   ]
 }
