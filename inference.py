@@ -7,9 +7,10 @@ from model import CNNModel, ViTModel
 from utils import label_id_dicts
 
 model_files = [file for file in os.listdir('outputs/') if file.endswith('.pth')]
+sausage_files = [f"input/valid/sausage/{file}" for file in os.listdir('input/valid/sausage/')]
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-i', '--input', default='input/valid/sausage/sausage_16.jpg', help='path to the input image')
+parser.add_argument('-i', '--input', default=sausage_files[0], help='path to the input image')
 parser.add_argument('-d', '--display', default=True, help='display each image')
 parser.add_argument('-m', '--model', default=model_files[0], type=str, help='choose the model file')
 args = vars(parser.parse_args())

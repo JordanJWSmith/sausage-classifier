@@ -24,35 +24,51 @@ def build_filepath(class_name):
 
 def scrape_images(class_name, queries):
     build_filepath(class_name)
+
+    user_agent = 'Mozilla/5.0 (Linux; Android 10; SM-A205U) ' \
+                 'AppleWebKit/537.36 (KHTML, like Gecko) ' \
+                 'Chrome/106.0.5249.126 Mobile Safari/537.36'
+
     for query in queries:
         print(f'downloading {query} images')
-        url = f"https://www.google.com/search?q={query}&sxsrf=ALeKk03xBalIZi7BAzyIRw8R4_KrIEYONg:1620885765119&" \
-              f"source=lnms&tbm=isch&sa=X&ved=2ahUKEwjv44CC_sXwAhUZyjgGHSgdAQ8Q_AUoAXoECAEQAw&cshid=1620885828054361"
-        page = requests.get(url)
 
-        soup = BeautifulSoup(page.content, 'html.parser')
-        image_tags = soup.find_all('img')
+        # scrape from Google images
+        google_url = f"https://www.google.com/search?q={query}&sxsrf=ALeKk03xBalIZi7BAzyIRw8R4_KrIEYONg:1620885765119" \
+                     f"&source=lnms&tbm=isch&sa=X" \
+                     f"&ved=2ahUKEwjv44CC_sXwAhUZyjgGHSgdAQ8Q_AUoAXoECAEQAw&cshid=1620885828054361"
+        google_page = requests.get(google_url)
+        google_soup = BeautifulSoup(google_page.content, 'html.parser')
+        image_tags = google_soup.find_all('img')
 
-        train_split = int(len(image_tags) * 0.8)
+        # scrape from shutterstock
+        ss_url = f"https://www.shutterstock.com/search?searchterm={query}&sort=popular"
+        ss_page = requests.get(ss_url, headers={'User-Agent': user_agent})
+        ss_soup = BeautifulSoup(ss_page.content, 'html.parser')
+        image_tags += ss_soup.find_all('img')
 
+        random.shuffle(image_tags)
+        test_train_boundary = int(len(image_tags) * 0.8)
         error_counter = 0
 
         for i, link in enumerate(image_tags):
-            # test script
-            if i > 0:
-                try:
-                    if i <= train_split - 1:
-                        urllib.request.urlretrieve(
-                            link['src'],
-                            f"input/train/{class_name}/{query.replace(' ', '_')}_{i}.jpg"
-                            )
-                    else:
-                        urllib.request.urlretrieve(
-                            link['src'],
-                            f"input/valid/{class_name}/{query.replace(' ', '_')}_{i}.jpg"
-                            )
-                except:
-                    error_counter += 1
+            ignore = ['.gif', '.svg']
+            if link['src'][-4:] not in ignore:
+                print(link['src'], '||', f"{class_name}/{query.replace(' ', '_')}_{i}.jpg")
+
+                if i > 0:
+                    try:
+                        if i <= test_train_boundary:
+                            urllib.request.urlretrieve(
+                                link['src'],
+                                f"input/train/{class_name}/{query.replace(' ', '_')}_{i}.jpg"
+                                )
+                        else:
+                            urllib.request.urlretrieve(
+                                link['src'],
+                                f"input/valid/{class_name}/{query.replace(' ', '_')}_{i}.jpg"
+                                )
+                    except:
+                        error_counter += 1
 
         print(f'Saved {len(image_tags) - error_counter} {query} images')
 

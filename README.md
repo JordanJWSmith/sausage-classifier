@@ -48,8 +48,8 @@ Currently 20 images are scraped for each query, 15 of which are placed in `train
 
 ## Inference
 
-Run the model on one given image and see its prediction by running `inference.py` with a filepath. This filepath 
-defaults to `sausage_16.jpg`.
+Run the model on one given image and see its prediction by running `inference.py` with a filepath. 
+If no path is provided, this defaults to the first image file in the `input/valid/sausage/` directory.
 
     python inference.py input/valid/sausage/chosen_image.jpg
 
@@ -89,7 +89,7 @@ Turn off the function to display the chosen image by setting the `--display` fla
 - ~~Create branch training on multiple classes~~
   - ~~Alter directory structure when webscraping~~
   - ~~Adjust classes in models~~
-- Read labels/num_labels from .json rather than hardcoding
+- ~~Read labels/num_labels from .json rather than hardcoding~~
 
 
 ## Notes
