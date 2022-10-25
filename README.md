@@ -85,7 +85,11 @@ Turn off the function to display the chosen image by setting the `--display` fla
 - Explore active learning for scraping additional images
 - Update powershell script to bash 
 - imwrite() in `inference.py`
-- Randomise test/train split
+- ~~Randomise test/train split~~
+- ~~Create branch training on multiple classes~~
+  - ~~Alter directory structure when webscraping~~
+  - ~~Adjust classes in models~~
+- Read labels/num_labels from .json rather than hardcoding
 
 
 ## Notes

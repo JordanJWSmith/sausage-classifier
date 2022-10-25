@@ -3,6 +3,9 @@ import torch.nn.functional as F
 import pytorch_lightning as pl
 from transformers import ViTForImageClassification, AdamW
 from datasets import train_loader, valid_loader
+from utils import label_id_dicts
+
+id2label, label2id, num_classes = label_id_dicts('image_queries.json')
 
 
 class CNNModel(nn.Module):
@@ -15,7 +18,7 @@ class CNNModel(nn.Module):
         self.conv4 = nn.Conv2d(128, 256, 5)
 
         self.fc1 = nn.Linear(256, 64)
-        self.fc2 = nn.Linear(64, 2)
+        self.fc2 = nn.Linear(64, num_classes)
         self.pool = nn.MaxPool2d(2, 2)
 
     def forward(self, x):
@@ -29,16 +32,12 @@ class CNNModel(nn.Module):
         return x
 
 
-id2label = {0: 'sausage', 1: 'non-sausage'}
-label2id = {'sausage': 0, 'non-sausage': 1}
-
-
 class ViTModel(pl.LightningModule):
-    def __init__(self, num_labels=2):
+    def __init__(self, num_labels=num_classes):
         super(ViTModel, self).__init__()
         self.name = 'ViTModel'
         self.vit = ViTForImageClassification.from_pretrained('google/vit-base-patch16-224-in21k',
-                                                             num_labels=2,
+                                                             num_labels=num_labels,
                                                              id2label=id2label,
                                                              label2id=label2id)
 

@@ -4,6 +4,7 @@ import torchvision.transforms as transforms
 import argparse
 import os
 from model import CNNModel, ViTModel
+from utils import label_id_dicts
 
 model_files = [file for file in os.listdir('outputs/') if file.endswith('.pth')]
 
@@ -14,7 +15,7 @@ parser.add_argument('-m', '--model', default=model_files[0], type=str, help='cho
 args = vars(parser.parse_args())
 
 device = ('cuda' if torch.cuda.is_available() else 'cpu')
-labels = ['sausage', 'not sausage']
+id2label, label2id, num_classes = label_id_dicts('image_queries.json')
 
 model_arg = args['model']
 model_type = model_arg.split('_')[0]
@@ -50,7 +51,7 @@ image = torch.unsqueeze(image, 0)
 with torch.no_grad():
     outputs = model(image.to(device))
 output_label = torch.topk(outputs, 1)
-pred_class = labels[int(output_label.indices)]
+pred_class = id2label[int(output_label.indices)]
 
 cv2.putText(
     orig_image,
