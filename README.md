@@ -84,6 +84,45 @@ Turn off the function to display the chosen image by setting the `--display` fla
 
     python inference.py input/valid/sausage/chosen_image.jpg --display False
 
+## Performance
+
+The below compares accuracy and loss for different training data. Each is trained on 20 epochs. 
+Training data is webscraped from various sources; it is useful to consider the tradeoff of more data vs varying quality. 
+
+### Google Images
+|       | Sausage   | Non-Sausage |
+|-------|-----------|-------------|
+| Train | 76 images | 107 images  |
+| Test  | 20 images | 26 images   |
+
+|                  Accuracy                  |                  Loss                  |
+|:------------------------------------------:|:--------------------------------------:|
+| ![](readme_images/CNN_google_accuracy.png) | ![](readme_images/CNN_google_loss.png) |
+
+
+### Google Images + ShutterStock
+|       | Sausage    | Non-Sausage |
+|-------|------------|-------------|
+| Train | 125 images | 170 images  |
+| Test  | 25 images  | 40  images  |
+
+|                        Accuracy                         |                        Loss                         |
+|:-------------------------------------------------------:|:---------------------------------------------------:|
+| ![](readme_images/CNN_google_shutterstock_accuracy.png) | ![](readme_images/CNN_google_shutterstock_loss.png) |
+
+
+### Google Images + ShutterStock + iStock
+|       | Sausage    | Non-Sausage  |
+|-------|------------|--------------|
+| Train | 241 images | 342 images   |
+| Test  | 59 images  | 79  images   |
+
+|                            Accuracy                            |                            Loss                            |
+|:--------------------------------------------------------------:|:----------------------------------------------------------:|
+| ![](readme_images/CNN_google_shutterstock_istock_accuracy.png) | ![](readme_images/CNN_google_shutterstock_istock_loss.png) |
+
+The iStock images are lower quality; images of sausage pizza and sausage dogs are among the scraped images. 
+This caused a decrease in performance. 
 
 ## To-Do
 - Add more models to compare
@@ -105,6 +144,7 @@ Turn off the function to display the chosen image by setting the `--display` fla
 - Automate finding and removing near-duplicate images from training data ([resource](https://towardsdatascience.com/find-and-remove-duplicate-images-in-your-dataset-3e3ec818b978))
 - Add logging
 - Add fiftyone labelling capability
+- ~~Compare performance on different webscrape sources~~
 
 
 ## Notes 

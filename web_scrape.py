@@ -26,7 +26,12 @@ def get_image_tags(url):
     user_agent = 'Mozilla/5.0 (Linux; Android 10; SM-A205U) ' \
                  'AppleWebKit/537.36 (KHTML, like Gecko) ' \
                  'Chrome/106.0.5249.126 Mobile Safari/537.36'
-    page = requests.get(url, headers={'User-Agent': user_agent})
+    # Google Image Search doesn't like the headers
+    if 'google' in url:
+        page = requests.get(url)
+    else:
+        page = requests.get(url, headers={'User-Agent': user_agent})
+
     soup = BeautifulSoup(page.content, 'html.parser')
     return soup.find_all('img')
 
@@ -52,7 +57,11 @@ def scrape_images(class_name, queries):
         istock_url = f"https://www.istockphoto.com/search/2/image?phrase={query}&sort=best"
 
         image_tags = []
-        for url in [google_url, ss_url, istock_url]:
+        for url in [
+            google_url,
+            ss_url,
+            istock_url
+        ]:
             image_tags += get_image_tags(url)
 
         random.shuffle(image_tags)
@@ -71,13 +80,13 @@ def scrape_images(class_name, queries):
                                 link['src'],
                                 f"input/train/{class_name}/{query.replace(' ', '_')}_{i}.jpg"
                                 )
-                            train_counter += 0
+                            train_counter += 1
                         else:
                             urllib.request.urlretrieve(
                                 link['src'],
                                 f"input/valid/{class_name}/{query.replace(' ', '_')}_{i}.jpg"
                                 )
-                            test_counter += 0
+                            test_counter += 1
                     except:
                         error_counter += 1
 
