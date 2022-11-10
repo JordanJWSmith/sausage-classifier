@@ -26,6 +26,17 @@ If this is your first time, training data will automatically be webscraped and o
             
             
 ### Training Options
+
+#### Model
+
+Specify which model you'd like to train using the `--model` flag. There are currently two options:
+- `CNN`: A basic CNN architecture
+- `ViT`: A pretrained [ViT (Vision Transformer) model](https://huggingface.co/docs/transformers/model_doc/vit) 
+from HuggingFace, fine-tuned on local training data
+
+This defaults to the `CNN` model.
+
+    python train.py --model ViT
             
 #### Epochs
 
@@ -76,11 +87,12 @@ Turn off the function to display the chosen image by setting the `--display` fla
 
 ## To-Do
 - Add more models to compare
+- Add more performance metrics
 - ~~Add args to allow users to select models~~
 - ~~Add greater flexibility when saving models/outputs~~
 - ~~Add model flexibility in `inference.py`~~
 - Improve inference.py output image
-- Explore alternative webscraping for training data - larger images etc
+- ~~Explore alternative webscraping for training data - larger images etc~~
 - ~~Webscraping queries read from json/txt file, args to specify path~~
 - Explore active learning for scraping additional images
 - Update powershell script to bash 
@@ -90,11 +102,16 @@ Turn off the function to display the chosen image by setting the `--display` fla
   - ~~Alter directory structure when webscraping~~
   - ~~Adjust classes in models~~
 - ~~Read labels/num_labels from .json rather than hardcoding~~
+- Automate finding and removing near-duplicate images from training data ([resource](https://towardsdatascience.com/find-and-remove-duplicate-images-in-your-dataset-3e3ec818b978))
+- Add logging
+- Add fiftyone labelling capability
 
 
-## Notes
+## Notes 
 - The image query 'sausage plate' was polluting the training/validation data with chopped sausages, wellingtons etc. 
-Replacing this query with 'single sausage' improved average accuracy from ~60 to ~80
+Replacing this query with 'single sausage' improved average accuracy. 
 - It's possible that the 'quality' of search images degrades the further down the list you go. In other words, the top 
 Google search image may be more accurate than the 20th. To account for this, a random shuffle was added after the images
 are webscraped and before they are written to files. 
+- Accuracy greatly improved when Shutterstock images were added as well as the existing Google images. 
+The model was improved by a larger training set (with potentially larger/higher quality images)

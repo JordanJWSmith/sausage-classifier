@@ -1,3 +1,6 @@
+# CNNModel: # inspo: https://debuggercafe.com/pytorch-imagefolder-for-training-cnn-models/
+# ViTModel: https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/VisionTransformer/Fine_tuning_the_Vision_Transformer_on_CIFAR_10_with_PyTorch_Lightning.ipynb#scrollTo=M8fcwD0OxEHP
+
 import torch.nn as nn
 import torch.nn.functional as F
 import pytorch_lightning as pl

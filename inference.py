@@ -17,6 +17,7 @@ args = vars(parser.parse_args())
 
 device = ('cuda' if torch.cuda.is_available() else 'cpu')
 id2label, label2id, num_classes = label_id_dicts('image_queries.json')
+print(id2label)
 
 model_arg = args['model']
 model_type = model_arg.split('_')[0]
